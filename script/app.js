@@ -67,3 +67,20 @@ function currentConditionHtml(temperature, icon, condition) {
         </div>`
   );
 }
+function fiveDayForeCastHtml(icon, weekDays, highTemp, lowTemp, description) {
+  ForeCast.insertAdjacentHTML(
+    `beforeend`,
+    ` <div class="day">
+          <h3>${weekDays}</h3>
+          <img src="https://openweathermap.org/img/wn/${icon}@2x.png" />
+          <div class="description">${description}</div>
+          <div class="temp">
+            <span class="high">${
+              highTemp.toFixed(0) - (273.15).toFixed(0)
+            }</span>/<span class="low">${
+      lowTemp.toFixed(0) - (273.15).toFixed(0)
+    }</span>
+          </div>
+        </div>`
+  );
+}
