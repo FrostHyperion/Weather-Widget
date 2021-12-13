@@ -1,4 +1,11 @@
 const apiKey = `70e67d3998df6d2db5e89f3233c0e8d6`;
+const ForeCast = document.querySelector(`.forecast`);
+const CurrentCondition = document.querySelector(`.current-conditions`);
+const coords = {
+  longitude: 0,
+  latitude: 0,
+};
+
 navigator.geolocation.getCurrentPosition((position) => {
   getData(position.coords.latitude, position.coords.longitude).then((data) => {
     // console.log(data);
@@ -52,6 +59,14 @@ const getData = async function (latitude, longitude) {
   const response = await fetch(url);
   const data = await response.json();
   console.log(data);
+  return data;
+};
+const getWeather = async function (latitude, longitude) {
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+  const response = await fetch(weatherUrl);
+  const data = await response.json();
+  console.log(data);
+
   return data;
 };
 function currentConditionHtml(temperature, icon, condition) {
