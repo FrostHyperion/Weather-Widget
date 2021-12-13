@@ -54,3 +54,16 @@ const getData = async function (latitude, longitude) {
   console.log(data);
   return data;
 };
+function currentConditionHtml(temperature, icon, condition) {
+  CurrentCondition.insertAdjacentHTML(
+    `beforeend`,
+    `<h2>Current Conditions</h2>
+        <img src="https://openweathermap.org/img/wn/${icon}@2x.png" />
+        <div class="current">
+          <div class="temp">${
+            temperature.toFixed(0) - (273.15).toFixed(0)
+          }&#8451;</div>
+          <div class="condition">${condition}</div>
+        </div>`
+  );
+}
