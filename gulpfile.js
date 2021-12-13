@@ -15,7 +15,6 @@ function moveCSSFiles() {
     .pipe(dest("dist/styles"));
   a;
 }
-
 function moveJsFiles() {
   return src("src/script/*.js")
     .pipe(sourcemaps.init())
