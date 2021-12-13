@@ -1,14 +1,9 @@
 const apiKey = `70e67d3998df6d2db5e89f3233c0e8d6`;
 const ForeCast = document.querySelector(`.forecast`);
 const CurrentCondition = document.querySelector(`.current-conditions`);
-const coords = {
-  longitude: 0,
-  latitude: 0,
-};
 
 navigator.geolocation.getCurrentPosition((position) => {
   getData(position.coords.latitude, position.coords.longitude).then((data) => {
-    // console.log(data);
     const icon = data.weather[0].icon;
     const tempearture = data.main.temp;
     const condition = data.weather[0].description;
@@ -18,7 +13,7 @@ navigator.geolocation.getCurrentPosition((position) => {
     (data) => {
       let first = 0;
       let last = 8;
-      // console.log(data);
+
       data.list.forEach((item) => {
         if (last <= 40) {
           const weatherData = data.list.slice(first, last);
@@ -32,8 +27,7 @@ navigator.geolocation.getCurrentPosition((position) => {
           const lowTemp = weatherData
             .map((item) => item.main.temp_min)
             .sort((a, b) => b - a)[0];
-          console.log(lowTemp);
-          // console.log(temperature);
+
           first = last;
           last = last + 8;
           const weekday = [
@@ -45,9 +39,9 @@ navigator.geolocation.getCurrentPosition((position) => {
             "Friday",
             "Saturday",
           ];
-          const d = new Date();
+          const d = new Date(weatherData[2].dt_txt);
           let weekDays = weekday[d.getDay()];
-          // console.log(weekDays);
+
           fiveDayForeCastHtml(icon, weekDays, highTemp, lowTemp, description);
         }
       });
@@ -58,15 +52,12 @@ const getData = async function (latitude, longitude) {
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
   const response = await fetch(url);
   const data = await response.json();
-  console.log(data);
   return data;
 };
 const getWeather = async function (latitude, longitude) {
   const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
   const response = await fetch(weatherUrl);
   const data = await response.json();
-  console.log(data);
-
   return data;
 };
 function currentConditionHtml(temperature, icon, condition) {
