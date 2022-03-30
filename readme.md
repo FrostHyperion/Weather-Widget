@@ -11,3 +11,9 @@ Build and deploy a weather widget that uses the navigator geolocation API to det
 3. Run `npm i `
 4. go to the src directory
 5. open the `index.html` in the browser with live server 
+
+
+
+Website Link
+
+https://gorgeous-begonia-3136cd.netlify.app/
